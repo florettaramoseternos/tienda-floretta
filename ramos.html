@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Floretta: ramos artesanales hechos a mano para durar para siempre.">
+  <title>Floretta — Ramos artesanales</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fondo: #fffaf4;
+      --blanco: #fffdf9;
+      --rosa: #e9a7b8;
+      --rosa-claro: #f8dfe6;
+      --verde: #b9d5b0;
+      --amarillo: #f5df9c;
+      --lavanda: #d9c9e9;
+      --texto: #514541;
+      --secundario: #897a74;
+      --borde: #eaded8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      color: var(--texto);
+      background: var(--fondo);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAVEGACIÓN */
+    nav {
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      width: calc(100% - 32px);
+      max-width: 1200px;
+      margin: 12px auto 0;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: rgba(255, 253, 249, .95);
+      border: 1px solid var(--borde);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px #78645a12;
+      backdrop-filter: blur(14px);
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 29px;
+      font-weight: 700;
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .links a {
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: var(--secundario);
+      font-size: 13px;
+      transition: background .25s, color .25s;
+    }
+
+    .links a:hover,
+    .links a.active {
+      background: var(--rosa-claro);
+      color: var(--texto);
+    }
+
+    /* CABECERA */
+    .page-hero {
+      text-align: center;
+      padding: 75px 20px 50px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 9px 15px;
+      margin-bottom: 20px;
+      border-radius: 30px;
+      background: var(--rosa-claro);
+      color: #946b77;
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(44px, 7vw, 72px);
+      font-weight: 600;
+      line-height: 1.05;
+    }
+
+    .gradient {
+      color: #bb8292;
+    }
+
+    .page-hero p {
+      max-width: 580px;
+      margin: 16px auto 0;
+      color: var(--secundario);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    /* CATÁLOGO */
+    .section {
+      width: calc(100% - 32px);
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 0 85px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 22px;
+      box-shadow: 0 8px 24px #78645a0c;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 35px #78645a20;
+    }
+
+    /* IMAGEN: OCUPA TODO EL MARCO */
+    .product-art {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--rosa-claro);
+    }
+
+    .product-art.pink { background: #f8dfe6; }
+    .product-art.green { background: #e3eddf; }
+    .product-art.yellow { background: #fff0c9; }
+    .product-art.lav { background: #eee5f5; }
+    .product-art.blue { background: #e1eef5; }
+
+    .product-art img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .info {
+      padding: 20px;
+    }
+
+    .info h2,
+    .info h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 27px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .desc {
+      min-height: 42px;
+      margin-top: 8px;
+      color: var(--secundario);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 17px;
+    }
+
+    .price {
+      font-size: 17px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .add {
+      padding: 11px 16px;
+      border: none;
+      border-radius: 12px;
+      background: var(--verde);
+      color: var(--texto);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+
+    .add:hover {
+      background: #a6c99d;
+      transform: scale(1.04);
+    }
+
+    /* PIE DE PÁGINA */
+    footer {
+      padding: 30px 20px;
+      border-top: 1px solid var(--borde);
+      color: var(--secundario);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    /* ANIMACIONES */
+    .reveal {
+      animation: aparecer .65s ease both;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 200;
+      max-width: calc(100% - 40px);
+      padding: 14px 18px;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      background: var(--blanco);
+      box-shadow: 0 10px 30px #78645a22;
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(15px);
+      pointer-events: none;
+      transition: .25s;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* TABLET */
+    @media (max-width: 850px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .product-art {
+        height: 260px;
+      }
+
+      nav {
+        padding: 10px 12px;
+      }
+
+      .links a {
+        padding: 9px 8px;
+        font-size: 12px;
+      }
+    }
+
+    /* MÓVIL */
+    @media (max-width: 560px) {
+      nav {
+        position: relative;
+        top: 0;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .links a {
+        font-size: 11px;
+        padding: 8px;
+      }
+
+      .page-hero {
+        padding: 55px 18px 35px;
+      }
+
+      h1 {
+        font-size: 46px;
+      }
+
+      .page-hero p {
+        font-size: 14px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .product-art {
+        height: 320px;
+      }
+
+      .info {
+        padding: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a class="logo-wrap" href="index.html">
+      <img alt="Logo de Floretta" class="logo-img" src="logo-floretta.png">
+      <span class="brand-name">Floretta</span>
+    </a>
+
+    <div class="links">
+      <a href="index.html">Inicio</a>
+      <a class="active" href="ramos.html">💐 Ramos</a>
+      <a href="flores.html">🌷 Flores sueltas</a>
+      <a href="carrito.html">🛒 Carrito (<span id="count">0</span>)</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-hero">
+      <span class="eyebrow">💐 Colección de ramos</span>
+      <h1>Ramos <span class="gradient">hechos a mano</span></h1>
+      <p>
+        Composiciones artesanales preparadas para regalar,
+        decorar tu espacio y conservar un recuerdo especial.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+
+        <article class="card reveal">
+          <div class="product-art pink">
+            <img src="img/flor_azul.png" alt="Ramo Primavera">
+          </div>
+          <div class="info">
+            <h3>Ramo azul</h3>
+            <p class="desc">Flores en tonos rosa, crema y lavanda.</p>
+            <div class="row">
+              <span class="price">34,90 €</span>
+              <button class="add" data-name="Ramo Primavera" data-price="34,90 €">Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="product-art green">
+            <img src="img/flor_amarilla.JPEG" alt="Ramo Silvestre">
+          </div>
+          <div class="info">
+            <h3>Ramo amarillo y naranja</h3>
+            <p class="desc">Una mezcla alegre de flores en tonos pastel.</p>
+            <div class="row">
+              <span class="price">39,90 €</span>
+              <button class="add" data-name="Ramo Silvestre" data-price="39,90 €">Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="product-art yellow">
+            <img src="img/flor_rosa.JPEG" alt="Ramo Dulce">
+          </div>
+          <div class="info">
+            <h3>Ramo Dulce</h3>
+            <p class="desc">Un ramo delicado en tonos cálidos.</p>
+            <div class="row">
+              <span class="price">29,90 €</span>
+              <button class="add" data-name="Ramo Dulce" data-price="29,90 €">Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="product-art lav">
+            <img src="img/ramo_lavanda.png" alt="Ramo Lavanda">
+          </div>
+          <div class="info">
+            <h3>Ramo Lavanda</h3>
+            <p class="desc">Una composición elegante en tonos lilas.</p>
+            <div class="row">
+              <span class="price">36,90 €</span>
+              <button class="add" data-name="Ramo Lavanda" data-price="36,90 €">Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="product-art green">
+            <img src="img/ramo_jardin.png" alt="Ramo Jardín">
+          </div>
+          <div class="info">
+            <h3>Ramo Jardín</h3>
+            <p class="desc">Colores suaves inspirados en un jardín.</p>
+            <div class="row">
+              <span class="price">42,90 €</span>
+              <button class="add" data-name="Ramo Jardín" data-price="42,90 €">Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="product-art pink">
+            <img src="img/ramo_especial.png" alt="Ramo Especial">
+          </div>
+          <div class="info">
+            <h3>Ramo Especial</h3>
+            <p class="desc">Un ramo único para momentos especiales.</p>
+            <div class="row">
+              <span class="price">49,90 €</span>
+              <button class="add" data-name="Ramo Especial" data-price="49,90 €">Añadir</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="product-art green">
+            <img src="img/ramo_silvestre.png" alt="Ramo Silvestre">
+          </div>
+          <div class="info">
+            <h3>Ramo Silvestre</h3>
+            <p class="desc">Una mezcla alegre de flores en tonos pastel.</p>
+            <div class="row">
+              <span class="price">39,90 €</span>
+              <button class="add" data-name="Ramo Silvestre" data-price="39,90 €">Añadir</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Floretta © 2026 · Ramos artesanales hechos con cariño ♡
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Carrito compartido entre páginas mediante localStorage.
+    let cart = [];
+
+    try {
+      cart = JSON.parse(localStorage.getItem("floresCart") || "[]");
+      if (!Array.isArray(cart)) cart = [];
+    } catch (error) {
+      cart = [];
+    }
+
+    const count = document.getElementById("count");
+    const toast = document.getElementById("toast");
+
+    function updateCount() {
+      count.textContent = cart.length;
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2000);
+    }
+
+    document.querySelectorAll(".add").forEach(button => {
+      button.addEventListener("click", () => {
+        cart.push({
+          name: button.dataset.name,
+          price: button.dataset.price
+        });
+
+        localStorage.setItem("floresCart", JSON.stringify(cart));
+        updateCount();
+        showToast("🌸 " + button.dataset.name + " añadido al carrito");
+      });
+    });
+
+    updateCount();
+  </script>
+</body>
+</html>
